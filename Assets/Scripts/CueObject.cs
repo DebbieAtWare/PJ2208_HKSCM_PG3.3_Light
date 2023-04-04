@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class CueObject : MonoBehaviour
 {
-    public string id;
+    public string receivedID;
     public List<CueStepObject> cueSteps = new List<CueStepObject>();
     public int currStep = 0;
 
     public void Setup(ConfigData_Cue cue)
     {
-        id = cue.ID;
+        receivedID = cue.ReceivedID;
         for (int i = 0; i < cue.CueSteps.Count; i++)
         {
             CueStepObject obj = gameObject.AddComponent<CueStepObject>();
-            obj.id = cue.CueSteps[i].ID;
+            obj.sendID = cue.CueSteps[i].SendID;
             obj.time = cue.CueSteps[i].Time;
             cueSteps.Add(obj);
             cueSteps[i].onStepFinishedCallback += CueSteps_OnStepFinished;
@@ -24,7 +24,7 @@ public class CueObject : MonoBehaviour
 
     public void Send()
     {
-        Debug.Log("Receive ID: " + id);
+        Debug.Log("Received ID: " + receivedID);
         cueSteps[0].Send();
     }
 
@@ -57,7 +57,7 @@ public class CueObject : MonoBehaviour
 
 public class CueStepObject : MonoBehaviour
 {
-    public string id;
+    public string sendID;
     public float time;
 
     public delegate void OnStepFinished();
@@ -70,7 +70,7 @@ public class CueStepObject : MonoBehaviour
         //if time == -1, it will not resend the cue
         //if time != -1, it will repeat and resend the cue in corresponding time interval
 
-        if (id == "-1")
+        if (sendID == "-1")
         {
             Debug.Log("Send Wait: " + time);
             Invoke("InvokeWaitStepFinished", time);
@@ -79,7 +79,7 @@ public class CueStepObject : MonoBehaviour
         {
             if (time == -1)
             {
-                UDPManager.instance.Send(ConfigJson.instance.data.UDPSetup.Lighting_IP, ConfigJson.instance.data.UDPSetup.Lighting_Port, id);
+                UDPManager.instance.Send(ConfigJson.instance.data.UDPSetup.Lighting_IP, ConfigJson.instance.data.UDPSetup.Lighting_Port, sendID);
                 if (onStepFinishedCallback != null)
                 {
                     onStepFinishedCallback.Invoke();
@@ -112,6 +112,6 @@ public class CueStepObject : MonoBehaviour
 
     void InvokeRepeatStep()
     {
-        UDPManager.instance.Send(ConfigJson.instance.data.UDPSetup.Lighting_IP, ConfigJson.instance.data.UDPSetup.Lighting_Port, id);
+        UDPManager.instance.Send(ConfigJson.instance.data.UDPSetup.Lighting_IP, ConfigJson.instance.data.UDPSetup.Lighting_Port, sendID);
     }
 }

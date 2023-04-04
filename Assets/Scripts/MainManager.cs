@@ -40,7 +40,7 @@ public class MainManager : MonoBehaviour
     {
         for (int i = 0; i < cueObjs.Count; i++)
         {
-            if (msg == cueObjs[i].id)
+            if (msg == cueObjs[i].receivedID)
             {
                 cueObjs[i].Send();
             }

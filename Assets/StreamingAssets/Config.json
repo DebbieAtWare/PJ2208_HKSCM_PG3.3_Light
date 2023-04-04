@@ -5,53 +5,53 @@
    },
    "Cues":[
       {
-         "ID":"000",
+         "ReceivedID":"000",
          "CueSteps":[
             {
-               "ID":"000_1",
+               "SendID":"000_1",
                "Time":-1
             },
             {
-               "ID":"-1",
+               "SendID":"-1",
                "Time":2
             },
             {
-               "ID":"000_2",
+               "SendID":"000_2",
                "Time":3
             }
          ]
       },
       {
-         "ID":"008",
+         "ReceivedID":"008",
          "CueSteps":[
             {
-               "ID":"008",
+               "SendID":"008",
                "Time":3
             }
          ]
       },
       {
-         "ID":"202",
+         "ReceivedID":"202",
          "CueSteps":[
             {
-               "ID":"202_1",
+               "SendID":"202_1",
                "Time":-1
             },
             {
-               "ID":"202_2",
+               "SendID":"202_2",
                "Time":-1
             }
          ]
       },
       {
-         "ID":"301",
+         "ReceivedID":"301",
          "CueSteps":[
             {
-               "ID":"301_1",
+               "SendID":"301_1",
                "Time":-1
             },
             {
-               "ID":"301_2",
+               "SendID":"301_2",
                "Time":3
             }
          ]

@@ -106,14 +106,14 @@ public class ConfigData
 [Serializable]
 public class ConfigData_Cue
 {
-    public string ID;
+    public string ReceivedID;
     public List<ConfigData_Cue_CueStep> CueSteps = new List<ConfigData_Cue_CueStep>();
 }
 
 [Serializable]
 public class ConfigData_Cue_CueStep
 {
-    public string ID;
+    public string SendID;
     public float Time;
 }
 
