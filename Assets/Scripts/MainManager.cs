@@ -38,6 +38,7 @@ public class MainManager : MonoBehaviour
 
     private void UdpManager_OnReceivedMsg(string msg)
     {
+        Debug.Log("UDP Received: " + msg);
         for (int i = 0; i < cueObjs.Count; i++)
         {
             if (msg == cueObjs[i].receivedID)
@@ -49,6 +50,11 @@ public class MainManager : MonoBehaviour
                 cueObjs[i].ResetAll();
             }
         }
+    }
+
+    private void Update()
+    {
+        udpManager.UpdateRun();
     }
 
     private void OnDestroy()
