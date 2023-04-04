@@ -38,7 +38,17 @@ public class MainManager : MonoBehaviour
 
     private void UdpManager_OnReceivedMsg(string msg)
     {
-        
+        for (int i = 0; i < cueObjs.Count; i++)
+        {
+            if (msg == cueObjs[i].id)
+            {
+                cueObjs[i].Send();
+            }
+            else
+            {
+                cueObjs[i].ResetAll();
+            }
+        }
     }
 
     private void OnDestroy()
