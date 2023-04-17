@@ -30,6 +30,7 @@ public class CueObject : MonoBehaviour
 
     public void ResetAll()
     {
+        currStep = 0;
         for (int i = 0; i < cueSteps.Count; i++)
         {
             cueSteps[i].ResetAll();
