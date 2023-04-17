@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
@@ -39,15 +40,33 @@ public class MainManager : MonoBehaviour
     private void UdpManager_OnReceivedMsg(string msg)
     {
         Debug.Log("UDP Received: " + msg);
-        for (int i = 0; i < cueObjs.Count; i++)
+        if (msg == configJson.data.ResetSceneCue.ReceivedID)
         {
-            if (msg == cueObjs[i].receivedID)
+            //Reset Scene
+            StartCoroutine(Ani());
+            IEnumerator Ani()
             {
-                cueObjs[i].Send();
+                for (int i = 0; i < cueObjs.Count; i++)
+                {
+                    cueObjs[i].ResetAll();
+                }
+                UDPManager.instance.Send(ConfigJson.instance.data.UDPSetup.Lighting_IP, ConfigJson.instance.data.UDPSetup.Lighting_Port, configJson.data.ResetSceneCue.SendID);
+                yield return new WaitForSeconds(configJson.data.ResetSceneCue.WaitResetSceneTime);
+                SceneManager.LoadScene("ResetScene");
             }
-            else
+        }
+        else
+        {
+            for (int i = 0; i < cueObjs.Count; i++)
             {
-                cueObjs[i].ResetAll();
+                if (msg == cueObjs[i].receivedID)
+                {
+                    cueObjs[i].Send();
+                }
+                else
+                {
+                    cueObjs[i].ResetAll();
+                }
             }
         }
     }

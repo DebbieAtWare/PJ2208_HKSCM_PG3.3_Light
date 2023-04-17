@@ -101,6 +101,7 @@ public class ConfigData
 {
     public ConfigData_UDPSetup UDPSetup = new ConfigData_UDPSetup();
     public List<ConfigData_Cue> Cues = new List<ConfigData_Cue>();
+    public ConfigData_ResetSceneCue ResetSceneCue;
 }
 
 [Serializable]
@@ -122,4 +123,12 @@ public class ConfigData_UDPSetup
 {
     public string Lighting_IP;
     public int Lighting_Port;
+}
+
+[Serializable]
+public class ConfigData_ResetSceneCue
+{
+    public string ReceivedID;
+    public string SendID;
+    public float WaitResetSceneTime;
 }

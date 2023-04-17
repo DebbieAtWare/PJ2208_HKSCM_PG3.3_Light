@@ -299,5 +299,10 @@
             }
          ]
       }
-   ]
+   ],
+   "ResetSceneCue":{
+      "ReceivedID":"999",
+      "SendID":"000",
+      "WaitResetSceneTime":0.5
+   }
 }
